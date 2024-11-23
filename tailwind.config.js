@@ -13,6 +13,7 @@ export default {
       magnolia: "hsl(217, 100%, 97%)",
       alabasta: "hsl(231, 100%, 99%)",
       white: " hsl(0, 0%, 100%)",
+      black: "#000",
     },
     extend: {
       boxShadow: {

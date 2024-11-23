@@ -1,11 +1,11 @@
 export default function PersonalInfo() {
   return (
-    <div className="px-2">
+    <div className="px-5">
       <h2 className="text-marine-blue font-semibold text-2xl ">
         Personal info
       </h2>
       <p className="text-sm mb-6 text-cool-gray">
-        Please provide your name, email address, and phone number.
+        Please provide your name, email address, & phone No.
       </p>
       <form className="flex flex-col">
         <label className="text-sm  text-marine-blue mb-1">Name</label>
