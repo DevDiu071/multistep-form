@@ -1,4 +1,20 @@
-export default function FinishingUp() {
+interface AddOnItem {
+  name: string;
+  id: string;
+  info: string;
+  amount: number;
+}
+
+type AddOnProps = {
+  selectedAddOn: AddOnItem[];
+  selectedPlan: {};
+};
+
+export default function FinishingUp({
+  selectedAddOn,
+  selectedPlan,
+}: AddOnProps) {
+  const addOnTotal = selectedAddOn.reduce((acc, item) => acc + item.amount, 0);
   return (
     <div className="px-4 mb-[67px]">
       <h2 className="text-marine-blue font-semibold text-2xl">Finishing up</h2>
@@ -8,27 +24,36 @@ export default function FinishingUp() {
       <div className="bg-alabasta rounded-md p-3">
         <div className="flex justify-between mb-4 text-sm border-b pb-3 border-light-blue">
           <div>
-            <p className="text-marine-blue font-semibold">Arcade(Monthly)</p>
+            <p className="text-marine-blue font-semibold text-lg">
+              {selectedPlan.name}({selectedPlan.id})
+            </p>
             <p className="text-cool-gray border-b-2 border-light-gray inline">
               change
             </p>
           </div>
-          <p className="text-marine-blue font-semibold">$9/mo</p>
+          <p className="text-marine-blue font-semibold">
+            ${selectedPlan.amount}/{selectedPlan.id === "yearly" ? "yr" : "mo"}
+          </p>
         </div>
         <div className="flex flex-col gap-y-2 text-sm">
-          <div className="flex justify-between">
-            <p className="text-cool-gray">Online service</p>
-            <p className="text-marine-blue">+$1/mo</p>
-          </div>
-          <div className="flex justify-between">
-            <p className="text-cool-gray">Larger storage</p>
-            <p className="text-marine-blue">+$2/mo</p>
-          </div>
+          {selectedAddOn.map((addOn) => (
+            <div key={Math.random()} className="flex justify-between">
+              <p className="text-cool-gray">{addOn.name}</p>
+              <p className="text-marine-blue text-xs font-medium">
+                +${addOn.amount}/{addOn.id === "yearly" ? "yr" : "mo"}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
       <div className="flex justify-between text-sm mt-6 px-3">
-        <p className="text-cool-gray">total(per month)</p>
-        <p className="text-blue font-semibold">+$12/mo</p>
+        <p className="text-cool-gray">
+          total(per {selectedPlan.id === "yearly" ? "Year" : "Month"})
+        </p>
+        <p className="text-blue font-semibold">
+          +${addOnTotal + selectedPlan.amount}/
+          {selectedPlan.id === "yearly" ? "yr" : "mo"}
+        </p>
       </div>
     </div>
   );

@@ -3,11 +3,18 @@ import clsx from "clsx";
 interface ButtonProps {
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
   currentIndex: number;
+  nextSection: boolean;
 }
 
-export default function Button({ setCurrentIndex, currentIndex }: ButtonProps) {
+export default function Button({
+  nextSection,
+  setCurrentIndex,
+  currentIndex,
+}: ButtonProps) {
   function handleNextButton() {
-    setCurrentIndex((curr) => curr + 1);
+    if (nextSection) {
+      setCurrentIndex((curr) => curr + 1);
+    }
   }
 
   function handlePrev() {
@@ -15,7 +22,12 @@ export default function Button({ setCurrentIndex, currentIndex }: ButtonProps) {
   }
   return (
     <div className="flex justify-between items-center mt-10 mx-4">
-      <button onClick={handlePrev} className="text-cool-gray text-sm">
+      <button
+        onClick={handlePrev}
+        className={clsx("text-cool-gray text-sm", {
+          "opacity-0": currentIndex === 0,
+        })}
+      >
         Go back
       </button>
       <button

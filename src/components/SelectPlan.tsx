@@ -1,22 +1,16 @@
 import clsx from "clsx";
 import { useState } from "react";
 
-interface FilteredPlansProps {
-  name: string;
-  id: string;
-  amount: number;
-}
 interface SelectPlanProps {
-  // setSubCription: React.Dispatch<React.SetStateAction<string>>;
-  // setFilteredPlans: React.Dispatch<React.SetStateAction<FilteredPlansProps[]>>;
-  // sections: FilteredPlansProps[];
-  // subCription: string;
+  setSelectedPlan: React.Dispatch<React.SetStateAction<{}>>;
   shiftBtn: boolean;
+  setNextSection: React.Dispatch<React.SetStateAction<boolean>>;
   handleSubCription: () => void;
   plansFiltered: {
     name: string;
     id: string;
     amount: number;
+    image: string;
   }[];
 }
 
@@ -26,7 +20,14 @@ export default function SelectPlan({
   plansFiltered,
   handleSubCription,
   shiftBtn,
+  setSelectedPlan,
+  setNextSection,
 }: SelectPlanProps) {
+  const [selected, setSelected] = useState("");
+  if (selected) {
+    setNextSection(true);
+  }
+
   return (
     <div className="mb-[60px]">
       <div className="ml-8">
@@ -42,21 +43,28 @@ export default function SelectPlan({
         {plansFiltered.map((plan) => (
           <div
             key={Math.random()}
-            onClick={() => console.log("curr plan: ", plan.name)}
-            className="border border-light-gray py-2 px-3 rounded-md"
+            onClick={() => {
+              setSelected(plan.name);
+              setSelectedPlan(plan);
+            }}
+            className={clsx("border border-light-gray py-2 px-3 rounded-md", {
+              "border-blue": selected === plan.name,
+            })}
           >
-            <img
-              width={30}
-              height={30}
-              src="/assets/images/icon-arcade.svg"
-              alt="arcade-icon"
-            />
+            <img width={30} height={30} src={plan.image} alt="arcade-icon" />
             <div className="mt-5 leading-loose">
               <p className="text-marine-blue font-semibold">{plan.name}</p>
               <p className="text-sm text-cool-gray">
                 ${plan.amount}/{shiftBtn ? "mo" : "yr"}
               </p>
-              <p className="text-xs text-marine-blue">2 months free</p>
+
+              <p
+                className={clsx("text-xs text-marine-blue", {
+                  "opacity-0": shiftBtn,
+                })}
+              >
+                2 months free
+              </p>
             </div>
           </div>
         ))}
