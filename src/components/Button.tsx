@@ -41,16 +41,19 @@ export default function Button({
     <div className="flex bg-white py-4 px-4 md:px-0 justify-between items-center mt-[100px] md:mt-0 md:mx-4">
       <button
         onClick={handlePrev}
-        className={clsx("text-cool-gray text-sm", {
-          "opacity-0": currentIndex === 0,
-        })}
+        className={clsx(
+          "text-cool-gray text-sm transition-colors hover:text-black",
+          {
+            "opacity-0": currentIndex === 0,
+          }
+        )}
       >
         Go back
       </button>
       <button
         onClick={handleNextButton}
         className={clsx(
-          "text-center text-xs bg-marine-blue text-white py-2 px-4 font-semibold rounded-md",
+          "text-center text-xs bg-marine-blue hover:bg-marine-hover transition-all text-white py-2 px-4 font-semibold rounded-md",
           { "bg-blue-color px-6": currentIndex === 3 }
         )}
       >

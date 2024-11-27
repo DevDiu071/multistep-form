@@ -53,7 +53,7 @@ export default function PersonalInfo({
           required
         />
         <div className="flex justify-end mt-10 md:mt-6 py-4 px-4">
-          <button className="text-xs bg-marine-blue w-[90px]  text-white py-2 px-4 font-semibold rounded-md">
+          <button className="text-xs bg-marine-blue w-[90px] hover:bg-marine-hover transition-all  text-white py-2 px-4 font-semibold rounded-md">
             Next Step
           </button>
         </div>

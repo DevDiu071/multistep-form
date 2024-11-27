@@ -4,6 +4,7 @@ export default {
   theme: {
     colors: {
       "marine-blue": "hsl(213, 96%, 18%)",
+      "marine-hover": "hsla(213, 92%, 34%, 0.858)",
       "blue-color": "hsl(243, 100%, 62%)",
       "pastal-blue": "hsl(228, 100%, 84%)",
       "light-blue": "hsl(206, 94%, 87%)",
