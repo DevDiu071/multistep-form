@@ -99,13 +99,13 @@ export default function App() {
   const [selectedPlan, setSelectedPlan] = useState({});
   const [selectedAddOn, setSelectedAddOn] = useState<AddOnProps[]>([]);
   const [nextSection, setNextSection] = useState<boolean>(false);
-  // const [filteredAddOns, setFilteredAddOns] = useState<AddOnProps[]>([]);
+  const [selected, setSelected] = useState("");
+  const [validate, setValidate] = useState(false);
 
   const [shiftBtn, setShiftBtn] = useState<boolean>(false);
   function handleSubcription() {
     setShiftBtn((shift) => !shift);
     setSubCription((sub) => (sub === "monthly" ? "yearly" : "monthly"));
-    // setFilteredAddOns(addOns.filter((add) => add.id !== subsCription));
   }
 
   const plansFiltered = sections.filter(
@@ -113,38 +113,45 @@ export default function App() {
   );
 
   const filteredAddOns = addOns.filter((add) => add.id !== subsCription);
-  console.log("Addons: ", filteredAddOns);
-
-  console.log("New: ", plansFiltered);
-  console.log("Selected: ", selectedPlan);
-  console.log("SelectedAdd: ", selectedAddOn);
 
   const arr = [
-    <PersonalInfo setNextSection={setNextSection} nextSection={nextSection} />,
+    <PersonalInfo
+      setNextSection={setNextSection}
+      nextSection={nextSection}
+      setCurrentIndex={setCurrentIndex}
+    />,
     <SelectPlan
       shiftBtn={shiftBtn}
       handleSubCription={handleSubcription}
       plansFiltered={plansFiltered}
       setSelectedPlan={setSelectedPlan}
       setNextSection={setNextSection}
+      selected={selected}
+      setSelected={setSelected}
+      selectedPlan={selectedPlan}
+      validate={validate}
+      setValidate={setValidate}
     />,
     <AddOn
       filteredAddOns={filteredAddOns}
       setSelectedAddOn={setSelectedAddOn}
       selectedAddOn={selectedAddOn}
+      setNextSection={setNextSection}
     />,
     <FinishingUp selectedAddOn={selectedAddOn} selectedPlan={selectedPlan} />,
     <ThankYou />,
   ];
 
   return (
-    <div className="grid grid-cols-7 rounded-md gap-x-[10px] max-w-[700px] mt-10 mx-auto bg-white p-2 shadow-custom">
+    <div className="md:grid md:grid-cols-7 flex flex-col rounded-md gap-x-[10px] max-w-[700px] md:mt-10 mx-auto md:bg-white md:p-2 shadow-custom">
       <SideNav currentIndex={currentIndex} />
       <MainPage
         components={arr}
         currentIndex={currentIndex}
         setCurrentIndex={setCurrentIndex}
         nextSection={nextSection}
+        selectedPlan={selectedPlan}
+        setValidate={setValidate}
       />
     </div>
   );

@@ -3,12 +3,14 @@ import { useRef, useState } from "react";
 
 interface PersonalInfoProps {
   setNextSection: React.Dispatch<React.SetStateAction<boolean>>;
+  setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
   nextSection: boolean;
 }
 
 export default function PersonalInfo({
   setNextSection,
   nextSection,
+  setCurrentIndex,
 }: PersonalInfoProps) {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState<string>("");
@@ -29,18 +31,17 @@ export default function PersonalInfo({
 
   // const formValidated = number && email && isValid && userName;
 
-  function subMitHandler() {
-    if (number && email && isValid && userName) {
-      setNextSection(true);
-      // console.log(number, email, isValid, userName);
-      // setNextSection(false);
-      console.log("YES");
-    }
+  function subMitHandler(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
+    setNextSection(true);
+    setCurrentIndex((curr) => curr + 1);
+    setNextSection(false);
   }
 
   console.log(userName);
   return (
-    <div className="px-5">
+    <div className="bg-white p-4 md:px-5 -mt-12 md:mt-0 rounded-md">
       <h2 className="text-marine-blue font-semibold text-2xl ">
         Personal info
       </h2>
@@ -55,8 +56,7 @@ export default function PersonalInfo({
           )}
           type="text"
           placeholder="e.g. Stephen King"
-          value={userName}
-          onChange={(e) => setUserName(e.target.value)}
+          required
         />
         <label className="text-sm  text-marine-blue mb-1">Email</label>
         <input
@@ -65,12 +65,7 @@ export default function PersonalInfo({
             { "border-red": !isValid && email }
           )}
           type="text"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-            setIsValid(validateEmail(e.target.value));
-            // handleInputChange(e);
-          }}
+          required
           placeholder="e.g. stephenking@lorem.com"
         />
         <label className="text-sm placeholder:text-sm  text-marine-blue mb-2">
@@ -80,9 +75,13 @@ export default function PersonalInfo({
           className="border mb-3 placeholder:text-sm rounded-md px-2 border-light-gray py-1"
           type="text"
           placeholder="e.g. +1 234 567"
-          value={number}
-          onChange={(e) => setNumber(Number(e.target.value))}
+          required
         />
+        <div className="flex justify-end mt-10 md:mt-6 py-4 px-4">
+          <button className="text-xs bg-marine-blue w-[90px]  text-white py-2 px-4 font-semibold rounded-md">
+            Next Step
+          </button>
+        </div>
       </form>
     </div>
   );

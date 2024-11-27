@@ -1,6 +1,6 @@
 export default function ThankYou() {
   return (
-    <div className="flex flex-col items-center text-center mt-[90px] mb-[100px]">
+    <div className="flex flex-col items-center text-center -mt-[50px] mx-2 p-4 rounded-md md:mt-[90px] mb-[100px] md:mb-0 bg-white py-[100px] md:py-[80px]">
       <img
         src="/assets/images/icon-thank-you.svg"
         alt="thank you icon"

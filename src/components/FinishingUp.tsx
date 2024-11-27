@@ -7,7 +7,7 @@ interface AddOnItem {
 
 type AddOnProps = {
   selectedAddOn: AddOnItem[];
-  selectedPlan: {};
+  selectedPlan: AddOnItem;
 };
 
 export default function FinishingUp({
@@ -16,7 +16,7 @@ export default function FinishingUp({
 }: AddOnProps) {
   const addOnTotal = selectedAddOn.reduce((acc, item) => acc + item.amount, 0);
   return (
-    <div className="px-4 mb-[67px]">
+    <div className="px-4 mb-[67px] md:mb-8 bg-white p-4 mx-2 rounded-md -mt-[50px] md:mt-0">
       <h2 className="text-marine-blue font-semibold text-2xl">Finishing up</h2>
       <p className="text-sm mb-6 text-cool-gray">
         Double-check everything looks OK before comfirming
