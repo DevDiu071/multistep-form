@@ -8,7 +8,14 @@ type Plan = {
 };
 
 interface SelectPlanProps {
-  setSelectedPlan: React.Dispatch<React.SetStateAction<{}>>;
+  setSelectedPlan: React.Dispatch<
+    React.SetStateAction<{
+      name: string;
+      id: string;
+      amount: number;
+      image: string;
+    }>
+  >;
   shiftBtn: boolean;
   setSelected: React.Dispatch<React.SetStateAction<string>>;
   setValidate: React.Dispatch<React.SetStateAction<boolean>>;

@@ -94,9 +94,13 @@ interface AddOnProps {
 
 export default function App() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [sections, setSections] = useState(plans);
   const [subsCription, setSubCription] = useState<string>("monthly");
-  const [selectedPlan, setSelectedPlan] = useState({});
+  const [selectedPlan, setSelectedPlan] = useState({
+    name: "",
+    id: "",
+    amount: 0,
+    image: "",
+  });
   const [selectedAddOn, setSelectedAddOn] = useState<AddOnProps[]>([]);
   const [nextSection, setNextSection] = useState<boolean>(false);
   const [selected, setSelected] = useState("");
@@ -108,9 +112,7 @@ export default function App() {
     setSubCription((sub) => (sub === "monthly" ? "yearly" : "monthly"));
   }
 
-  const plansFiltered = sections.filter(
-    (section) => section.id !== subsCription
-  );
+  const plansFiltered = plans.filter((section) => section.id !== subsCription);
 
   const filteredAddOns = addOns.filter((add) => add.id !== subsCription);
 

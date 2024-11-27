@@ -5,7 +5,12 @@ interface componentProps {
   currentIndex: number;
   nextSection: boolean;
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>;
-  selectedPlan: {};
+  selectedPlan: {
+    name: string;
+    id: string;
+    amount: number;
+    image: string;
+  };
   setValidate: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export default function MainPage({

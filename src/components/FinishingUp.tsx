@@ -7,7 +7,12 @@ interface AddOnItem {
 
 type AddOnProps = {
   selectedAddOn: AddOnItem[];
-  selectedPlan: AddOnItem;
+  selectedPlan: {
+    name: string;
+    id: string;
+    amount: number;
+    image: string;
+  };
 };
 
 export default function FinishingUp({
