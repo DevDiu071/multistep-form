@@ -1,5 +1,4 @@
 import clsx from "clsx";
-import { useRef, useState } from "react";
 
 interface PersonalInfoProps {
   setNextSection: React.Dispatch<React.SetStateAction<boolean>>;
@@ -9,28 +8,8 @@ interface PersonalInfoProps {
 
 export default function PersonalInfo({
   setNextSection,
-  nextSection,
   setCurrentIndex,
 }: PersonalInfoProps) {
-  const [userName, setUserName] = useState("");
-  const [email, setEmail] = useState<string>("");
-  const [isValid, setIsValid] = useState<boolean | null>(false);
-  const [number, setNumber] = useState<number>();
-
-  const validateEmail = (email: string): boolean => {
-    // Simple regex for email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const value = e.target.value;
-    setEmail(value);
-    setIsValid(validateEmail(value));
-  };
-
-  // const formValidated = number && email && isValid && userName;
-
   function subMitHandler(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
@@ -39,7 +18,6 @@ export default function PersonalInfo({
     setNextSection(false);
   }
 
-  console.log(userName);
   return (
     <div className="bg-white p-4 md:px-5 -mt-12 md:mt-0 rounded-md">
       <h2 className="text-marine-blue font-semibold text-2xl ">
@@ -60,10 +38,7 @@ export default function PersonalInfo({
         />
         <label className="text-sm  text-marine-blue mb-1">Email</label>
         <input
-          className={clsx(
-            "border placeholder:text-sm mb-3 rounded-md px-2 border-light-gray py-1",
-            { "border-red": !isValid && email }
-          )}
+          className="border placeholder:text-sm mb-3 rounded-md px-2 border-light-gray py-1"
           type="text"
           required
           placeholder="e.g. stephenking@lorem.com"
